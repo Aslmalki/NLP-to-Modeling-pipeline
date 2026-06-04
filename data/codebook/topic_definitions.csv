@@ -1,0 +1,6 @@
+topic_name,definition
+"0_space_mission_crew_team","BERTopic cluster from this run (internal id 0). Key lexical terms extracted by the model: space, mission, crew, team, astronaut, research, nasa, human, performance, study."
+"1_team_agent_model_desert","BERTopic cluster from this run (internal id 1). Key lexical terms extracted by the model: team, agent, model, desert, task, norm, group, performance, system, individual."
+"2_climate_change_temperature_agricultural","BERTopic cluster from this run (internal id 2). Key lexical terms extracted by the model: climate, change, temperature, agricultural, area, water, heat, soil, agriculture, crop."
+"3_cold_exposure_performance_temperature","BERTopic cluster from this run (internal id 3). Key lexical terms extracted by the model: cold, exposure, performance, temperature, sport, environment, human, exercise, heat, physiol."
+"4_offshore_work_health_worker","Documents examining the occupational health and safety of individuals in remote and hazardous industrial environments, particularly offshore oil and gas platforms. This theme includes research on work-related stress, fatigue, mental health, and the impact of the physical work environment on employee well-being."

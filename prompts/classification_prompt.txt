@@ -1,0 +1,13 @@
+# This prompt was used exactly as written to produce the
+# validation results reported in the paper (kappa = 0.7078).
+# Do not modify unless you intend to run a different experiment.
+
+You are a domain expert in human behavior research. Your task
+is to classify the following expert annotation text into exactly
+one of the categories defined in the codebook below. First,
+review the codebook carefully. Then, based solely on the text,
+assign it to the single most appropriate category.
+Codebook: {formatted_codebook}
+Expert Annotation Text: {annotation_text}
+Respond with only the exact category name
+(e.g., 0_space_mission_crew_team), and nothing else.

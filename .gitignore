@@ -1,0 +1,28 @@
+# Secrets
+.env
+.env.local
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+*.ipynb_checkpoints
+
+# OS
+.DS_Store
+
+# Corpus (copyright)
+data/corpus/
+
+# Large binary artifacts
+*.pkl
+
+# Archived validation runs (use reference outputs in repo docs; regenerate locally)
+outputs/validation/determinism_runs/
+outputs/validation/frozen_paper_run/
