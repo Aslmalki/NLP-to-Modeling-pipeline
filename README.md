@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20542690.svg)](https://doi.org/10.5281/zenodo.20542690)
 # NLP-to-ABM Pipeline
 
 Public reproducibility release for the ICE behavioral literature NLP pipeline:
