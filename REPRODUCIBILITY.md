@@ -105,11 +105,10 @@ All constants live in `config.py` and are logged in `methodology_summary.json` a
 |-----------|-------|
 | Model | **`claude-sonnet-4-6`** (single pinned model) |
 | temperature | 0 |
-| Gemini fallback | **disabled** (`ENABLE_GEMINI_FALLBACK = False`) |
 | Per-document model log | column `llm_model_used` in codifier / validation CSVs |
 | Prompts | inline in pipeline; templates in `prompts/` |
 
-If the Claude API fails, the run **stops with an error** (no silent model switching).
+If the Claude API fails, the run **stops with an error** (no alternate model).
 
 ### Cohen's κ (Module B)
 - Function: `sklearn.metrics.cohen_kappa_score` (default, unweighted)

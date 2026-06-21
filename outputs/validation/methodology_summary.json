@@ -3,12 +3,10 @@
   "timestamp": "2026-06-21T05:04:44.181468",
   "seeds": {
     "REPRODUCIBILITY_SEED": 42,
-    "DOC2VEC_SEED": 42,
-    "LLM_SEED": 42
+    "DOC2VEC_SEED": 42
   },
   "llm_model": "claude-sonnet-4-6",
   "llm_temperature": 0,
-  "llm_gemini_fallback_enabled": false,
   "python_version": "3.11.9",
   "validation_subset_ids_file": "data/validation_subset_ids.txt",
   "validation_subset_n": 63,

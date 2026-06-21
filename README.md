@@ -65,7 +65,7 @@ Reference run artifacts (committed):
 Quick facts:
 
 - **Validation subset**: exactly **63 Paper IDs** in `data/validation_subset_ids.txt`
-- **LLM**: `claude-sonnet-4-6`, `temperature=0`; Gemini fallback disabled in reported runs
+- **LLM**: `claude-sonnet-4-6`, `temperature=0`
 - **Determinism**: `python run_three_pipeline_kappa_check.py` → κ = **0.7078414839797639** × 3
 - **Environment**: Python **3.11.9**; `requirements_pinned.txt`
 

@@ -7,7 +7,6 @@
     "requirements_file": "requirements_pinned.txt",
     "llm_model": "claude-sonnet-4-6",
     "llm_temperature": 0,
-    "llm_gemini_fallback_enabled": false,
     "reproducibility_seed": 42,
     "validation_subset_file": "data/validation_subset_ids.txt",
     "validation_subset_n": 63

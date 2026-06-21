@@ -66,8 +66,6 @@ from config import (
     CODEBOOK_CSV,
     LLM_MODEL,
     LLM_TEMPERATURE,
-    LLM_SEED,
-    ENABLE_GEMINI_FALLBACK,
     VALIDATION_SUBSET_IDS_PATH,
     load_validation_subset_ids,
 )
@@ -1108,8 +1106,6 @@ def _call_llm(prompt, api_key=None):
 
     claude_key = api_key or os.environ.get("CLAUDE_API_KEY") or os.environ.get("Claude_API_KEY")
     if not claude_key:
-        if ENABLE_GEMINI_FALLBACK:
-            return _call_llm_gemini_fallback(prompt)
         raise RuntimeError(
             "CLAUDE_API_KEY is required for LLM classification. "
             "Set CLAUDE_API_KEY or run with --skip-llm / --reuse-codifier."
@@ -1159,60 +1155,6 @@ def _call_llm(prompt, api_key=None):
     raise RuntimeError(
         f"Claude API failed for model {model_name!r} after {max_retries} attempts: {last_error}"
     )
-
-
-def _call_llm_gemini_fallback(prompt):
-    """Optional Gemini path — disabled for reported validation runs (ENABLE_GEMINI_FALLBACK=False)."""
-    import requests
-
-    gemini_key = os.environ.get("GEMINI_API_KEY")
-    if not gemini_key:
-        raise RuntimeError("GEMINI_API_KEY not set and Claude unavailable.")
-    max_retries = 3
-    base_delay = 30
-    for model_name in ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"]:
-        for attempt in range(max_retries):
-            try:
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent"
-                gen_cfg = {
-                    "temperature": LLM_TEMPERATURE,
-                    "maxOutputTokens": 256,
-                    "seed": LLM_SEED,
-                }
-                r = requests.post(
-                    url,
-                    json={
-                        "contents": [{"parts": [{"text": prompt}]}],
-                        "generationConfig": gen_cfg,
-                    },
-                    params={"key": gemini_key},
-                    timeout=60,
-                )
-                if r.status_code == 400 and "seed" in gen_cfg:
-                    gen_cfg = {"temperature": LLM_TEMPERATURE, "maxOutputTokens": 256}
-                    r = requests.post(
-                        url,
-                        json={
-                            "contents": [{"parts": [{"text": prompt}]}],
-                            "generationConfig": gen_cfg,
-                        },
-                        params={"key": gemini_key},
-                        timeout=60,
-                    )
-                if r.status_code == 429:
-                    time.sleep(base_delay * (2**attempt))
-                    continue
-                r.raise_for_status()
-                data = r.json()
-                parts = data.get("candidates", [{}])[0].get("content", {}).get("parts", [])
-                text = (parts[0].get("text", "") or "").strip() if parts else ""
-                return text, model_name
-            except Exception as e:
-                if "404" in str(e):
-                    break
-                if attempt < max_retries - 1:
-                    time.sleep(base_delay * (2**attempt))
-    raise RuntimeError("Gemini fallback failed for all configured models.")
 
 
 def module_a_expert_codifier(
@@ -1900,11 +1842,9 @@ def _finalize_pipeline(
         "seeds": {
             "REPRODUCIBILITY_SEED": REPRODUCIBILITY_SEED,
             "DOC2VEC_SEED": DOC2VEC_SEED,
-            "LLM_SEED": LLM_SEED,
         },
         "llm_model": LLM_MODEL,
         "llm_temperature": LLM_TEMPERATURE,
-        "llm_gemini_fallback_enabled": ENABLE_GEMINI_FALLBACK,
         "python_version": sys.version.split()[0],
         "validation_subset_ids_file": os.path.relpath(VALIDATION_SUBSET_IDS_PATH, PROJECT_ROOT),
         "validation_subset_n": len(validation_subset_ids),

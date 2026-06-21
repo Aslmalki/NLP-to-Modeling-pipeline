@@ -92,12 +92,8 @@ UMAP_RANDOM_STATE = REPRODUCIBILITY_SEED
 VALIDATION_SUBSET_IDS_PATH = os.path.join(DATA_DIR, "validation_subset_ids.txt")
 EXPECTED_VALIDATION_SUBSET_N = 63
 
-# LLM validation (run_blue_ocean_pipeline.py) — single-model for reproducibility.
+# LLM validation (run_blue_ocean_pipeline.py) — single pinned Claude model.
 LLM_TEMPERATURE = 0
-LLM_SEED = 42  # Reserved for optional Gemini path only; not used in reported Claude runs.
-# Single-model classification for reproducibility.
-# Gemini fallback available via ENABLE_GEMINI_FALLBACK but not used in reported results.
-ENABLE_GEMINI_FALLBACK = False
 LLM_MODEL = "claude-sonnet-4-6"
 
 
