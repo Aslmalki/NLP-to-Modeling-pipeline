@@ -1608,7 +1608,7 @@ Respond in this exact format for each variable:
 - GROUNDING: [phrase from corpus]
 - OPERATIONALIZATION: [simulation suggestion]"""
 
-        resp = _call_llm(prompt)
+        resp, _ = _call_llm(prompt)
         if resp:
             for block in resp.split("- NAME:"):
                 if "GROUNDING:" in block and "OPERATIONALIZATION:" in block:
