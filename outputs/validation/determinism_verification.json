@@ -1,0 +1,34 @@
+{
+  "verification_type": "triple_run_determinism_check",
+  "verified_date": "2026-06-21",
+  "command": "python run_three_pipeline_kappa_check.py",
+  "environment": {
+    "python_version": "3.11.9",
+    "requirements_file": "requirements_pinned.txt",
+    "llm_model": "claude-sonnet-4-6",
+    "llm_temperature": 0,
+    "llm_gemini_fallback_enabled": false,
+    "reproducibility_seed": 42,
+    "validation_subset_file": "data/validation_subset_ids.txt",
+    "validation_subset_n": 63
+  },
+  "runs": [
+    {
+      "run": 1,
+      "cohen_kappa": 0.7078414839797639,
+      "kappa_paired_rows": 63
+    },
+    {
+      "run": 2,
+      "cohen_kappa": 0.7078414839797639,
+      "kappa_paired_rows": 63
+    },
+    {
+      "run": 3,
+      "cohen_kappa": 0.7078414839797639,
+      "kappa_paired_rows": 63
+    }
+  ],
+  "result": "PASS — all three runs identical",
+  "paper_reported_kappa_rounded": 0.7078
+}

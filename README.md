@@ -51,13 +51,25 @@ cp .env.example .env
 | **Determinism check** (3 fresh runs; κ must match) | `python run_three_pipeline_kappa_check.py` |
 | Notebook walkthrough | `notebooks/full_pipeline.ipynb` |
 
-## Reproducibility (v1.1+)
+## Verified reproducibility package
 
-- **Validation subset**: exactly **63 Paper IDs** in `data/validation_subset_ids.txt` (loaded at runtime; not computed dynamically).
-- **LLM**: single pinned model `claude-sonnet-4-6`, `temperature=0`; no silent Gemini fallback in reported runs (`ENABLE_GEMINI_FALLBACK=False` in `config.py`).
-- **Logging**: `llm_model_used` column in `outputs/validation/module_a_codifier_output.csv` and `validation_labels.csv`.
-- **Environment**: Python **3.11.9**; pinned versions in `requirements_pinned.txt`.
-- **Frozen paper artifacts**: `outputs/validation/frozen_paper_run/` (κ ≈ 0.708 reference run). Re-run `run_blue_ocean_pipeline.py` for fresh LLM labels under the pinned config above.
+Full checklist, pinned parameters, and expected outputs:
+**[REPRODUCIBILITY.md](REPRODUCIBILITY.md)**
+
+Reference run artifacts (committed):
+
+- `outputs/validation/methodology_summary.json` — run metadata and κ
+- `outputs/validation/classification_report.txt` — per-class metrics (n = 63)
+- `outputs/validation/determinism_verification.json` — three-run κ identity check (2026-06-21)
+
+Quick facts:
+
+- **Validation subset**: exactly **63 Paper IDs** in `data/validation_subset_ids.txt`
+- **LLM**: `claude-sonnet-4-6`, `temperature=0`; Gemini fallback disabled in reported runs
+- **Determinism**: `python run_three_pipeline_kappa_check.py` → κ = **0.7078414839797639** × 3
+- **Environment**: Python **3.11.9**; `requirements_pinned.txt`
+
+Use **`run_blue_ocean_pipeline.py`** for paper κ; **`run_pipeline.py`** is supplementary ablation only.
 
 ## Note on `src/validation.py`
 

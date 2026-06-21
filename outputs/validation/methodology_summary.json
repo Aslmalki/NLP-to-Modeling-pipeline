@@ -1,0 +1,144 @@
+{
+  "pipeline_version": "3.0",
+  "timestamp": "2026-06-21T05:04:44.181468",
+  "seeds": {
+    "REPRODUCIBILITY_SEED": 42,
+    "DOC2VEC_SEED": 42,
+    "LLM_SEED": 42
+  },
+  "llm_model": "claude-sonnet-4-6",
+  "llm_temperature": 0,
+  "llm_gemini_fallback_enabled": false,
+  "python_version": "3.11.9",
+  "validation_subset_ids_file": "data/validation_subset_ids.txt",
+  "validation_subset_n": 63,
+  "topic_list_used_at_runtime": [
+    "0_space_mission_crew_team",
+    "1_team_agent_model_desert",
+    "2_climate_change_temperature_agricultural",
+    "3_cold_exposure_performance_temperature",
+    "4_offshore_work_health_worker"
+  ],
+  "topic_list_prompt_order_alphabetical": [
+    "0_space_mission_crew_team",
+    "1_team_agent_model_desert",
+    "2_climate_change_temperature_agricultural",
+    "3_cold_exposure_performance_temperature",
+    "4_offshore_work_health_worker"
+  ],
+  "bertopic_num_topics_non_outlier": 5,
+  "corpus_statistics": {
+    "num_documents": 108,
+    "vocabulary_size": 71442,
+    "total_tokens": 1033640,
+    "mean_doc_length_tokens": 9570.74074074074,
+    "std_doc_length_tokens": 16288.141766652278
+  },
+  "topic_definitions": {
+    "0_space_mission_crew_team": "BERTopic cluster from this run (internal id 0). Key lexical terms extracted by the model: space, mission, crew, team, astronaut, research, nasa, human, performance, study.",
+    "1_team_agent_model_desert": "BERTopic cluster from this run (internal id 1). Key lexical terms extracted by the model: team, agent, model, desert, task, norm, group, performance, system, individual.",
+    "2_climate_change_temperature_agricultural": "BERTopic cluster from this run (internal id 2). Key lexical terms extracted by the model: climate, change, temperature, agricultural, area, water, heat, soil, agriculture, crop.",
+    "3_cold_exposure_performance_temperature": "BERTopic cluster from this run (internal id 3). Key lexical terms extracted by the model: cold, exposure, performance, temperature, sport, environment, human, exercise, heat, physiol.",
+    "4_offshore_work_health_worker": "Documents examining the occupational health and safety of individuals in remote and hazardous industrial environments, particularly offshore oil and gas platforms. This theme includes research on work-related stress, fatigue, mental health, and the impact of the physical work environment on employee well-being."
+  },
+  "prompts": {
+    "classification": "Definition-based prompting. Template: 'You are a domain expert in human behavior research. Your task is to classify the following expert annotation text into exactly one of the categories defined in the codebook below. First, review the codebook carefully. Then, based solely on the text, assign it to the single most appropriate category. **Codebook:** {formatted_codebook} **Expert Annotation Text:** {annotation_text} Respond with only the exact category name (e.g., 0_team_agent_task_norm), and nothing else.'",
+    "confidence": "How confident are you in this classification? Respond with only one word: High, Medium, or Low.",
+    "rationale": "From the original expert annotation text, extract the single, verbatim phrase (maximum 30 words) that best justifies your classification. Respond with only the quoted text."
+  },
+  "documents_processed": 108,
+  "documents_classified": 63,
+  "documents_excluded_empty_expert_annotation": 1,
+  "documents_excluded": 1,
+  "codifier_rows_unclassifiable_total": 15,
+  "documents_per_bertopic_id_full_corpus": {
+    "0": 45,
+    "1": 39,
+    "2": 10,
+    "3": 8,
+    "4": 6
+  },
+  "documents_per_bertopic_id_validation_subset_only": {
+    "0": 37,
+    "1": 10,
+    "2": 3,
+    "3": 8,
+    "4": 5
+  },
+  "corpus_exclusion_from_cohens_kappa": {
+    "corpus_documents_not_in_kappa": 45,
+    "reason_no_csv_row_matched_to_corpus_file": 44,
+    "reason_matched_csv_row_but_empty_expert_annotation": 1,
+    "reason_other_not_in_kappa": 0,
+    "paper_ids_no_csv_match": [
+      "Anderson-2018-Combining",
+      "BARRICELLI_2019_Survey",
+      "Balke-2013-Coordination",
+      "BlancoFernandez-2023-Effects",
+      "BlancoFernandez-2023-Interactions",
+      "BlancoFernandez-2024-Interactions",
+      "Boroomand-2021-Hard",
+      "Bray_2023_Beyond",
+      "Cao-2022-Group",
+      "Ch11_Survival_Analysis",
+      "Doyoe_2016_Resilience",
+      "Duncan-2019-AgentBased",
+      "Ellinas-2017-Dynamics",
+      "Esmaeilzadeh-2019-SoS",
+      "Estes-2023-Investigating",
+      "Guo-2012-Using",
+      "Guyer_2021_Identifying",
+      "Harlan_2014_Heat",
+      "Ishak_2018_Organizational",
+      "Iswara-2023-Assessing",
+      "Johnson_2006_TheActive",
+      "Kimhi_2011_Understanding",
+      "Kitchin-2015-Comparison",
+      "Komurcu_2020_MidCentury",
+      "Lim-2019-All",
+      "Lim-2023-Kill",
+      "Lorscheid-2020-Irrationality",
+      "MartinezMiranda-2011-Modeling",
+      "Matallah_2021_Prediction",
+      "Palinkas_2004_Cross",
+      "Raveendran-2022-Division",
+      "Reia-2018-AgentBased",
+      "Rojas-2008-AgentBased",
+      "RojasVillafa\u00f1e-2010-AgentBased",
+      "Sina_2016_Understanding",
+      "Small-2014-Effect",
+      "Smallidge_2013_Modeling",
+      "Stein-2024-Talk",
+      "Stevens_2014_Submarine",
+      "Thomsen-2016-Exploring",
+      "Welland_2015_Desert",
+      "Wijk_2021_Social",
+      "Wollak_2020_Social",
+      "Yezli_2023_Human"
+    ],
+    "matched_but_empty_expert_annotation": [
+      {
+        "paper_id": "Leach_2016_Psychological",
+        "csv_row_idx": 26
+      }
+    ],
+    "other_not_in_kappa_detail": []
+  },
+  "irr_note": "Fleiss' Kappa was not used because the human annotation is a collaborative consensus, not independent parallel coding.",
+  "cohen_kappa_uses_canonical_topic_ids": true,
+  "skipped_unparseable_topic_id": 0,
+  "validation_only_mode": false,
+  "extend_validation": false,
+  "bertopic_state_path": null,
+  "kappa_paired_rows": 63,
+  "cohen_kappa": 0.7078414839797639,
+  "paper_reporting": {
+    "corpus_n_full_bertopic": 108,
+    "validation_n_cohen_kappa_classification_report_confusion_matrix": 63,
+    "documents_excluded_field_definition": "documents_excluded_empty_expert_annotation: CSV codifier rows with UNCLASSIFIABLE and no annotation text (empty Discussion+Details). This is NOT the count of corpus files excluded from kappa; see corpus_exclusion_from_cohens_kappa.",
+    "full_corpus_topic_counts_file": "document_topic_assignments.csv",
+    "validation_pairwise_file": "validation_labels.csv",
+    "classification_report_and_confusion_matrix_scope": "Precision, recall, classification_report.txt, and outputs/figures/confusion_matrix.png apply only to the n validation pairs in validation_labels.csv, not to all N corpus documents.",
+    "ablation_study_scope": "Embedding \u00d7 min_topic_size ablation is implemented in run_pipeline.py (TF-IDF, Doc2Vec, SciBERT, SocialBERT; min_topic_size in {2,4,6,8,10}). It loads whatever texts are in data/corpus at run time. This repository does not ship a regenerated ablation table for the expanded corpus under results/; older ablation_study_results.csv files in parent 'Old Ver Work folder' reflect the earlier smaller corpus. Re-run run_pipeline.py after changing processed_data to refresh ablation numbers for the current N."
+  }
+}
