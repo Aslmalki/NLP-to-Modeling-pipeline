@@ -5,6 +5,7 @@ ODE-compliant: paths, seeds, and constants for reproducibility.
 Layout: repository root contains ``config.py``, ``data/``, ``outputs/``, ``src/``.
 """
 import os
+from typing import Optional
 
 from src.utils import set_all_seeds  # noqa: F401 — re-exported for pipeline entrypoints
 
@@ -68,3 +69,36 @@ TOPIC_LABELS = {
 }
 DOC2VEC_SEED = REPRODUCIBILITY_SEED
 UMAP_RANDOM_STATE = REPRODUCIBILITY_SEED
+
+# Fixed validation subset for Cohen's kappa (loaded at runtime; do not derive dynamically).
+VALIDATION_SUBSET_IDS_PATH = os.path.join(DATA_DIR, "validation_subset_ids.txt")
+EXPECTED_VALIDATION_SUBSET_N = 63
+
+# LLM validation (run_blue_ocean_pipeline.py) — single-model for reproducibility.
+LLM_TEMPERATURE = 0
+LLM_SEED = 42  # Reserved for optional Gemini path only; not used in reported Claude runs.
+# Single-model classification for reproducibility.
+# Gemini fallback available via ENABLE_GEMINI_FALLBACK but not used in reported results.
+ENABLE_GEMINI_FALLBACK = False
+LLM_MODEL = "claude-sonnet-4-6"
+
+
+def load_validation_subset_ids(path: Optional[str] = None) -> frozenset:
+    """Load the pinned list of Paper IDs used for kappa / confusion-matrix reporting."""
+    path = path or VALIDATION_SUBSET_IDS_PATH
+    if not os.path.isfile(path):
+        raise FileNotFoundError(
+            f"Validation subset file not found: {path}. "
+            "Create data/validation_subset_ids.txt with exactly 63 Paper IDs."
+        )
+    ids = []
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                ids.append(line)
+    if len(ids) != EXPECTED_VALIDATION_SUBSET_N:
+        raise ValueError(
+            f"Expected {EXPECTED_VALIDATION_SUBSET_N} validation Paper IDs in {path}, got {len(ids)}."
+        )
+    return frozenset(ids)
